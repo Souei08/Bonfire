@@ -1,0 +1,54 @@
+.card-hover:hover {
+    /* height: 500px; */
+    /* Adjust the height for the hover effect */
+}
+
+.card-hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Adjust the alpha value for the transparency */
+    z-index: 0;
+    opacity: 0;
+    /* Initial opacity */
+    transition: opacity 0.3s ease;
+}
+
+.card-hover:hover::before {
+    opacity: 1;
+    /* Make the background visible on hover */
+}
+
+.card-hover h4 {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+    /* Add a smooth transition effect for the transform property */
+}
+
+.card-hover:hover h4 {
+    transform: translateY(-90px);
+    /* Adjust the translateY value for the hover effect */
+}
+
+.card-hover p,
+.card-hover a {
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* Add a smooth transition effect for opacity and transform properties */
+}
+
+.card-hover:hover p{
+    opacity: 1;
+    transform: translateY(-30%);
+}
+.card-hover:hover a {
+    opacity: 1;
+    transform: translateY(-100%);
+}
