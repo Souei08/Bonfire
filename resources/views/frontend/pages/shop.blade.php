@@ -296,54 +296,41 @@
             }
         }
     })
-
     function fetchData(callback) {
-    $.ajax({
-        type: 'GET',
-        url: '{{ route("get.cart") }}',
-        success: function(response) {
-            callback(null, response.cart);
-        },
-        error: function(error) {
-            console.error('Error retrieving cart');
-            callback(error, null);
-        }
-    });
-}
+        $.ajax({
+            type: 'GET',
+            url: '{{ route("get.cart") }}',
+            success: function(response) {
+                callback(null, response.cart);
+            },
+            error: function(error) {
+                console.error('Error retrieving cart');
+                callback(error, null);
+            }
+        });
+    }
 
     $('.addToCartButton').click(function() {
-        let newItem = $(this).data('items');
-        let newItemId = newItem.id;
+        const newItem = $(this).data('items');
+        const newItemId = newItem.id;
 
         fetchData(function(error, result) {
             if (error) {
                 console.error('Error:', error);
-            } else {
-            let existingArray = JSON.parse(result) || [];
-
-            existingArray.forEach(function(obj) {
-                if (obj.id === newItemId) {
-                    if (obj.qty) {
-                        obj.qty = obj.qty + 1;
-                    } else {
-                        obj.qty = 2;
-                    }
-                } 
-            });
-
-            var similarProductExists = existingArray.some(function(obj) {
-                return obj.id === newItemId;
-            });
-
-            let addToCartData = "";
-
-            if (!similarProductExists) {
-                const combinedArray = existingArray.concat([newItem]);
-
-                addToCartData = JSON.stringify(combinedArray);
-            } else {
-                addToCartData = JSON.stringify(existingArray);
+                return;
             }
+
+            const existingArray = JSON.parse(result) || [];
+            const updatedArray = existingArray.map(obj => {
+                if (obj.id === newItemId) {
+                    obj.qty = obj.qty ? obj.qty + 1 : 2;
+                }
+                return obj;
+            });
+
+            const similarProductExists = existingArray.some(obj => obj.id === newItemId);
+
+            const addToCartData = JSON.stringify(similarProductExists ? existingArray : updatedArray);
 
             $.ajax({
                 type: 'POST',
@@ -361,10 +348,7 @@
             });
 
             window.location.href = "{{ url('cart') }}";
-            }
         });
-
-
     });
     
 </script>
