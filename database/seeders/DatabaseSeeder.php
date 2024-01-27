@@ -18,16 +18,26 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
+        // \App\Models\User::factory()->create([s
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
 
         User::create([
-            'name' => 'Admin',
+            'firstName' => 'Admin',
+            'lastName' => 'Admin',
+            'number' => '123',
             'email' => 'hello@rweb.solutions',
             'password' => Hash::make('*'),
             'role' => 'cms'
+        ]);
+        User::create([
+            'firstName' => 'lorem',
+            'lastName' => 'ipsum',
+            'number' => '123465798',
+            'email' => 'lorem@email.com',
+            'password' => Hash::make('123456'),
+            'role' => 'user'
         ]);
     }
 }

@@ -1,6 +1,6 @@
 <div class="d-xl-block d-none">
-    <div class="w-100  {{ !in_array(request()->path(), ['account', 'registration', 'settings', 'login-account']) ? 'header-overlay position-absolute top-0 start-50 translate-middle-x' : '' }}" style="font-family: 'Bebas Neue', sans-serif;">
-        <nav class="navbar navbar-expand-lg {{ !in_array(request()->path(), ['account', 'registration', 'settings' , 'login-account']) ? 'bg-white bg-opacity-50' : 'bg-black' }}">
+    <div class="w-100  {{ !in_array(request()->path(), ['account', 'registration', 'settings', 'login-account', 'user/account', 'user/settings', 'user/account/edit']) ? 'header-overlay position-absolute top-0 start-50 translate-middle-x' : '' }}" style="font-family: 'Bebas Neue', sans-serif;">
+        <nav class="navbar navbar-expand-lg {{ !in_array(request()->path(), ['account', 'registration', 'settings', 'login-account', 'user/account', 'user/settings', 'user/account/edit']) ? 'bg-white bg-opacity-50' : 'bg-black' }}">
             <!-- {{ !request()->is('registration')  ? 'header-overlay position-absolute top-0 start-50 translate-middle-x' : '' }} -->
             <div class="d-flex align-items-center mx-auto py-2">
 
@@ -69,9 +69,15 @@
                         </li>
                         <li class="nav-item me-3">
                             <div class="">
-                                <a class="nav-link mx- py- px-" href="{{ url('login-account') }}">
-                                    <img src="{{ asset('images/button-user.png') }}" class="nav-logo img-fluid" alt="img">
-                                </a>
+                                @auth
+                                    <a class="nav-link mx- py- px-" href="{{ url('user/account') }}">
+                                        <img src="{{ asset('images/button-user.png') }}" class="nav-logo img-fluid" alt="img">
+                                    </a>
+                                @else
+                                    <a class="nav-link mx- py- px-" href="{{ url('login-account') }}">
+                                        <img src="{{ asset('images/button-user.png') }}" class="nav-logo img-fluid" alt="img">
+                                    </a>
+                                @endauth
                             </div>
                         </li>
                     </ul>

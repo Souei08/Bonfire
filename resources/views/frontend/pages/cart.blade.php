@@ -93,6 +93,7 @@
             </div>
         </div>
     </div> -->
+    @if(is_array($decodedCarts) && count($decodedCarts) > 0)
     @foreach($decodedCarts as $cart)
 
     <div class="row py-2" style="border-bottom: 2px solid #f6b024;">
@@ -124,6 +125,11 @@
         </div>
     </div>
     @endforeach
+    @else
+    <div class="mt-3">
+        <h2>No items in the cart.</h2>
+    </div>
+    @endif
 
     <style>
         #quantityProduct {

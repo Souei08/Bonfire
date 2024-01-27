@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Contactus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class PageController extends Controller
@@ -74,7 +75,24 @@ class PageController extends Controller
     }
     public function account (Request $request)
     {
-        return view('frontend.pages.account');
+        if (Auth::check()) {
+            // Get the currently authenticated user
+            $user = Auth::user();
+    
+            // You can now safely access the user's information
+            // For example, $user->firstName, $user->email, etc.
+    
+            return view('frontend.pages.account', ['user' => $user]);
+        } else {
+            // Redirect to the login page or handle the case where the user is not authenticated
+            return redirect()->route('login-account');
+        }
+    }
+    public function accountEdit (Request $request)
+    {
+
+        return view('frontend.pages.accountEdit');
+    
     }
     public function settings (Request $request)
     {
@@ -124,7 +142,7 @@ class PageController extends Controller
 
 
     public function regAccount (Request $request){
-        // return 'test';
+        // return $request;
         $request->validate([
             'lastname' => 'required',
             'firstname' => 'required',

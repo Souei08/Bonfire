@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend as FrontendController;
 use App\Http\Controllers\Backend as BackendController;
 use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\Frontend\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +29,8 @@ Route::get('/contact', [PageController::class, 'contact']);
 Route::get('/cart', [PageController::class, 'cart']);
 Route::get('/payment', [PageController::class, 'payment']);
 Route::get('/registration', [PageController::class, 'registration']);
-Route::get('/account', [PageController::class, 'account']);
-Route::get('/settings', [PageController::class, 'settings']);
+
+
 
 Route::get('/login-account', [PageController::class, 'login']);
 
@@ -49,8 +50,8 @@ Route::get('/error', [App\Http\Controllers\ResponseController::class, 'error'])-
 Auth::routes();
 
 // AUTH USER ACCESS
-Route::middleware(['auth', 'user-access:user'])->group(function () {
-});
+// Route::middleware(['auth', 'user-access:user'])->group(function () {
+// });
 
 // AUTH CMS ACCESS
 Route::get('/admin/login', [ BackendController\AuthController::class, 'login' ])->name('admin.login');
@@ -74,4 +75,15 @@ Route::prefix('admin')->middleware(['auth', 'user-access:cms'])->group(function 
     Route::get('unpinned/{id}', [BackendController\BlogController::class, 'unpinned']);
 
 
+});
+
+
+Route::get('/login-user', [AccountController::class, 'login' ])->name('login');
+Route::post('/login-user', [AccountController::class, 'signIn' ])->name('signin');
+Route::prefix('user')->middleware(['auth', 'user-access:user'])->group(function () {
+    Route::post('/logout', [ AccountController::class, 'logout' ])->name('logout');
+
+    Route::get('/account', [PageController::class, 'account']);
+    Route::get('/settings', [PageController::class, 'settings']);
+    Route::get('/account/edit', [PageController::class, 'accountEdit']);
 });

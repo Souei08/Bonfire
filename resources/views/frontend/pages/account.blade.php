@@ -44,24 +44,32 @@
                 <img src="{{ asset('images/logo-header.png') }}" class="d-block align-middle img-fluid mx-auto" alt="...">
                 <br>
                 <div class="d-flex flex-column">
-                    <a href="{{ url('account') }}" class="btn w-100 rounded-0 profile-button border-0 {{ request()->is('account') ? 'active' : '' }}" onmouseover="changeImage('cartImage1', true)" onmouseout="changeImage('cartImage1', false)">
+                    <a href="{{ url('user/account') }}" class="btn w-100 rounded-0 profile-button border-0 {{ request()->is('user/account') ? 'active' : '' }}" onmouseover="changeImage('cartImage1', true)" onmouseout="changeImage('cartImage1', false)">
                         <div class="d-flex justify-content-start align-items-center px-5 py-1">
                             <span class=""><img src="{{ asset('images/icon-blck-dashboard.png') }}" class="d-block align-middle img-fluid me-2" alt="..." id="cartImage1"></span>
                             <span class="">My Dashboard</span>
                         </div>
                     </a>
-                    <a href="{{ url('settings') }}" class="btn w-100 rounded-0 profile-button border-0 {{ request()->is('settings') ? 'active' : '' }}" onmouseover="changeImage2('cartImage2', true)" onmouseout="changeImage2('cartImage2', false)">
+                    <a href="{{ url('user/settings') }}" class="btn w-100 rounded-0 profile-button border-0 {{ request()->is('user/settings') ? 'active' : '' }}" onmouseover="changeImage2('cartImage2', true)" onmouseout="changeImage2('cartImage2', false)">
                         <div class="d-flex justify-content-start align-items-center px-5 py-1">
                             <span class=""><img src="{{ asset('images/icon-blck-setting.png') }}" class="d-block align-middle img-fluid me-2" alt="..." id="cartImage2"></span>
                             <span class="">Profile Settings</span>
                         </div>
                     </a>
-                    <a class="btn w-100 rounded-0 profile-button border-0 {{ request()->is('/support') ? 'active' : '' }}" onmouseover="changeImage3('cartImage3', true)" onmouseout="changeImage3('cartImage3', false)">
+                    <a class="btn w-100 rounded-0 profile-button border-0 {{ request()->is('user/support') ? 'active' : '' }}" onmouseover="changeImage3('cartImage3', true)" onmouseout="changeImage3('cartImage3', false)">
                         <div class="d-flex justify-content-start align-items-center px-5 py-1">
                             <span class=""><img src="{{ asset('images/icon-blck-support.png') }}" class="d-block align-middle img-fluid me-2" alt="..." id="cartImage3"></span>
                             <span class="">Support</span>
                         </div>
                     </a>
+                    <form action="{{ url('user/logout') }}" method="POST">@csrf
+                        <button class="btn w-100 rounded-0 profile-button border-0">
+                            <div class="d-flex justify-content-start align-items-center px-5 py-1">
+                                {{-- <span class=""><img src="{{ asset('images/icon-blck-support.png') }}" class="d-block align-middle img-fluid me-2" alt="..." id="cartImage3"></span> --}}
+                                <span class="">logout</span>
+                            </div>
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -73,17 +81,18 @@
                             <br>
                             <h4>My Profile</h4>
                             <br>
+                            
                             <div class="d-flex justify-content-between py-2" style="border-bottom: 2px solid #f6b024;">
-                                <span class="span">Jan Wing</span>
-                                <span class="span">+638 2291 1688</span>
+                                <span class="span">{{$user->firstName}} {{$user->lastName}}</span>
+                                <span class="span">+{{$user->number}}</span>
                             </div>
                             <br>
                             <div class="d-flex justify-content-between py-2" style="border-bottom: 2px solid #f6b024;">
-                                <span class="span">janwing@sample.com</span>
+                                <span class="span">{{$user->email}}</span>
                             </div>
-
+                            
                             <div class="row justify-content-center align-items-center pt-4">
-                                <a href="{{ url('account') }}" class="btn btn-primary fs-4 px-5 w-auto">EDIT</a>
+                                <a href="{{ url('user/account/edit') }}" class="btn btn-primary fs-4 px-5 w-auto">EDIT</a>
                             </div>
                         </div>
                     </div>

@@ -50,52 +50,36 @@
                     {{ Session::get('success') }}
                   </div>
                 @endif
+
                 {{-- <h5>Profile Details</h5> --}}
                 <div style="border:1px solid #f6b024;"></div>
-
+                  <form action="{{url('login-user')}}" method="POST">@csrf
                 <div class="row my-3 gy-2">
                     <div class="col-md-12">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="fname" class="form-control rounded-0 pt-3" id="fname" style="border-width: 2px; height: 55px;">
-                            <label for="fname" class="text-black placeholder-label">Email Address*</label>
+                            <input type="text" name="email" class="form-control rounded-0 pt-3" id="email" style="border-width: 2px; height: 55px;">
+                            @error('email')
+                            The email is Invalid
+                            @enderror
+                            <label for="email" class="text-black placeholder-label">Email Address*</label>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="lname" class="form-control rounded-0 pt-3" id="lname" style="border-width: 2px; height: 55px;">
-                            <label for="lname" class="text-black placeholder-label">Password</label>
-                        </div>
-                    </div>
-                    {{-- <div class="col-md-6">
-                        <div class="form-group position-relative mb-2">
-                            <input type="email" name="email" class="form-control rounded-0 pt-3" id="email" style="border-width: 2px; height: 55px;">
-                            <label for="email" class="text-black placeholder-label">Email Address*</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group position-relative mb-2">
-                            <input type="number" name="number" class="form-control rounded-0 pt-3" id="number" style="border-width: 2px; height: 55px;">
-                            <label for="number" class="text-black placeholder-label">Phone Number*</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group position-relative mb-2">
                             <input type="password" name="password" class="form-control rounded-0 pt-3" id="password" style="border-width: 2px; height: 55px;">
-                            <label for="password" class="text-black placeholder-label">Password*</label>
+                            @error('password')
+                            {{ $message }}
+                            @enderror
+                            <label for="password" class="text-black placeholder-label">Password</label>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group position-relative mb-2">
-                            <input type="password" name="password" class="form-control rounded-0 pt-3" id="password" style="border-width: 2px; height: 55px;">
-                            <label for="password" class="text-black placeholder-label">Confirm Password*</label>
-                        </div>
-                    </div> --}}
+                    
 
                     <p>No Account yet? <a href="{{url('registration')}}">Register Here</a></p>
                     <div class="row justify-content-center align-items-center p-3">
-                        <a href="{{ url('account') }}" class="btn btn-primary fs-4 px-5 w-auto">Login</a>
+                        <button type="submit" class="btn btn-primary fs-4 px-5 w-auto">Login</button>
                     </div>
-
+                </form>
                 </div>
             </div>
 
