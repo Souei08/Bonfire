@@ -69,7 +69,7 @@
                         <div class="row my-5">
                             <div class="col-lg-5">
                                 <div class="d-flex align-items-center justify-content-center h-100">
-                                    <img src="{{ asset('images/img-product-1.jpg') }}" class="d-block align-middle img-fluid" alt="...">
+                                    <img src="{{asset('uploads/products/' .$item->thumbnail)}}" class="d-block align-middle img-fluid" alt="...">
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -129,7 +129,7 @@
                         <div class="row my-5">
                             <div class="col-lg-5">
                                 <div class="d-flex align-items-center justify-content-center h-100">
-                                    <img src="{{ asset('images/img-product-1.jpg') }}" class="d-block align-middle img-fluid" alt="...">
+                                    <img src="{{asset('uploads/products/' .$item->thumbnail)}}" class="d-block align-middle img-fluid" alt="...">
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -188,7 +188,7 @@
                     <div class="row my-5">
                         <div class="col-lg-5">
                             <div class="d-flex align-items-center justify-content-center h-100">
-                                <img src="{{ asset('images/img-product-1.jpg') }}" class="d-block align-middle img-fluid" alt="...">
+                                <img src="{{asset('uploads/products/' .$item->thumbnail)}}" class="d-block align-middle img-fluid" alt="...">
                             </div>
                         </div>
                         <div class="col-lg-7">

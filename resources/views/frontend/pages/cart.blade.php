@@ -65,41 +65,14 @@
             <h6>Price</h6>
         </div>
     </div>
-    <!-- <div class="row py-2" style="border-bottom: 2px solid #f6b024;">
-        <div class="col-lg-3">
-            <div class="d-flex align-items-center h-100">
-                <img src="{{ asset('images/img-product-1.jpg') }}" class="d-block align-middle img-fluid" style="width: 150px; height: 140px;" alt="...">
-    <h5 class="fw-bold">Charcoal Briquets</h5>
-    </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="d-flex align-items-center h-100 justify-content-lg-start justify-content-center">
-            <h5 class="fw-bold">Charcoal Briquets in PP Sack</h5>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="d-flex align-items-center h-100 justify-content-lg-start justify-content-center">
-            <div class="d-flex">
-                <button class="btn rounded fw-bold shadow" type="button" id="decrementQuantity" style="color: #065fad;">-</button>
-                <input type="text" class="form-control text-center border-0 fw-bold" value="1" id="quantityProduct" readonly>
-                <button class="btn rounded fw-bold shadow" type="button" id="incrementQuantity" style="color: #065fad;">+</button>
-            </div>
-            <a href="" class="mx-2" style="color: #054780;">Remove</a>
-        </div>
-    </div>
-        <div class="col-lg-3">
-            <div class="d-flex align-items-center h-100 justify-content-lg-start justify-content-center">
-                <h5 class="fw-bold price">P680.00</h5>
-            </div>
-        </div>
-    </div> -->
+
     @if(is_array($decodedCarts) && count($decodedCarts) > 0)
     @foreach($decodedCarts as $cart)
 
     <div class="row py-2" style="border-bottom: 2px solid #f6b024;">
         <div class="col-lg-3">
             <div class="d-flex align-items-center h-100">
-                <img src="{{ asset('images/img-product-2.jpg') }}" class="d-block align-middle img-fluid" style="width: 150px; height: 140px;" alt="...">
+                <img src="{{asset('uploads/products/' .$cart->thumbnail)}}" class="d-block align-middle img-fluid" style="width: 150px; height: 140px;" alt="...">
                 <h5 class="fw-bold">{{$cart->prodName}}</h5>
             </div>
         </div>
@@ -120,7 +93,7 @@
         </div>
         <div class="col-lg-3">
             <div class="d-flex align-items-center h-100 justify-content-lg-start justify-content-center">
-                <h5 class="fw-bold price">P680.00</h5>
+                <h5 class="fw-bold price">P{{$cart->price}}</h5>
             </div>
         </div>
     </div>
