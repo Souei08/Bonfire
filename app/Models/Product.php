@@ -15,6 +15,7 @@ class Product extends Model
         'thumbnail',
         'description',
         'varation',
+        'price',
         'weight',
         'length',
         'width',

@@ -1,6 +1,6 @@
 <div class="d-xl-block d-none">
-    <div class="w-100  {{ !in_array(request()->path(), ['account', 'registration', 'settings']) ? 'header-overlay position-absolute top-0 start-50 translate-middle-x' : '' }}" style="font-family: 'Bebas Neue', sans-serif;">
-        <nav class="navbar navbar-expand-lg {{ !in_array(request()->path(), ['account', 'registration', 'settings']) ? 'bg-white bg-opacity-50' : 'bg-black' }}">
+    <div class="w-100  {{ !in_array(request()->path(), ['account', 'registration', 'settings', 'login-account']) ? 'header-overlay position-absolute top-0 start-50 translate-middle-x' : '' }}" style="font-family: 'Bebas Neue', sans-serif;">
+        <nav class="navbar navbar-expand-lg {{ !in_array(request()->path(), ['account', 'registration', 'settings' , 'login-account']) ? 'bg-white bg-opacity-50' : 'bg-black' }}">
             <!-- {{ !request()->is('registration')  ? 'header-overlay position-absolute top-0 start-50 translate-middle-x' : '' }} -->
             <div class="d-flex align-items-center mx-auto py-2">
 
@@ -69,7 +69,7 @@
                         </li>
                         <li class="nav-item me-3">
                             <div class="">
-                                <a class="nav-link mx- py- px-" href="{{ url('registration') }}">
+                                <a class="nav-link mx- py- px-" href="{{ url('login-account') }}">
                                     <img src="{{ asset('images/button-user.png') }}" class="nav-logo img-fluid" alt="img">
                                 </a>
                             </div>
@@ -132,7 +132,7 @@
         </li>
         <li class="nav-item me-3">
             <div class="">
-                <a class="nav-link mx-1 py- px-" href="{{ url('registration') }}">
+                <a class="nav-link mx-1 py- px-" href="{{ url('login-account') }}">
                     <img src="{{ asset('images/button-user.png') }}" class="nav-logo img-fluid" alt="img">
                 </a>
             </div>

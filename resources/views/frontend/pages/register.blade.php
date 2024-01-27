@@ -45,49 +45,79 @@
                 <br>
                 <h5>Profile Details</h5>
                 <div style="border:1px solid #f6b024;"></div>
-
+                <form action="{{url('reg-account')}}" method="POST">@csrf
                 <div class="row my-3 gy-2">
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="fname" class="form-control rounded-0 pt-3" id="fname" style="border-width: 2px; height: 55px;">
-                            <label for="fname" class="text-black placeholder-label">First Name*</label>
+                            <input type="text" name="firstname" class="form-control rounded-0 pt-3" id="firstname" style="border-width: 2px; height: 55px;">
+                            <label for="firstname" class="text-black placeholder-label">First Name*</label>
+                            @error('firstname')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="lname" class="form-control rounded-0 pt-3" id="lname" style="border-width: 2px; height: 55px;">
-                            <label for="lname" class="text-black placeholder-label">Last Name*</label>
+                            <input type="text" name="lastname" class="form-control rounded-0 pt-3" id="lastname" style="border-width: 2px; height: 55px;">
+                            <label for="lastname" class="text-black placeholder-label">Last Name*</label>
+                            @error('lastname')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
                             <input type="email" name="email" class="form-control rounded-0 pt-3" id="email" style="border-width: 2px; height: 55px;">
                             <label for="email" class="text-black placeholder-label">Email Address*</label>
+                            @error('email')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
                             <input type="number" name="number" class="form-control rounded-0 pt-3" id="number" style="border-width: 2px; height: 55px;">
                             <label for="number" class="text-black placeholder-label">Phone Number*</label>
+                            @error('number')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
                             <input type="password" name="password" class="form-control rounded-0 pt-3" id="password" style="border-width: 2px; height: 55px;">
                             <label for="password" class="text-black placeholder-label">Password*</label>
+                            @error('password')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
-                            <input type="password" name="password" class="form-control rounded-0 pt-3" id="password" style="border-width: 2px; height: 55px;">
-                            <label for="password" class="text-black placeholder-label">Confirm Password*</label>
+                            <input type="password" name="password_confirmation" class="form-control rounded-0 pt-3" id="password_confirmation" style="border-width: 2px; height: 55px;">
+                            <label for="password_confirmation" class="text-black placeholder-label">Confirm Password*</label>
+                            @error('password_confirmation')
+                            <span class="text-danger">
+                                The password is not match
+                            </span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="row justify-content-center align-items-center p-3">
-                        <a href="{{ url('account') }}" class="btn btn-primary fs-4 px-5 w-auto">SIGN IN</a>
+                        <button type="submit" class="btn btn-primary fs-4 px-5 w-auto">SIGN IN</button>
                     </div>
-
+                </form>
                 </div>
             </div>
 

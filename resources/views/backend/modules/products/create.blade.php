@@ -68,6 +68,16 @@
                 </span>
                 @enderror
             </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Price</label>
+                <input type="text" class="form-control" name="price" id="exampleFormControlInput1" placeholder="">
+                @error('price')
+                <span class="text-danger">
+                    {{ $message }}
+                </span>
+                @enderror
+            </div>
             <br>
             <h3 class="text-bold">Size/Dimension</h3>
             <div class="row">

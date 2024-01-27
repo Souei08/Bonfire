@@ -21,6 +21,7 @@ return new class extends Migration
             $table->longText('description');
             $table->longText('varation');
             $table->longText('weight');
+            $table->longText('price');
             $table->longText('length')->nullable();
             $table->longText('width')->nullable();
             $table->longText('height')->nullable();

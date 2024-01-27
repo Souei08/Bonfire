@@ -31,11 +31,15 @@ Route::get('/registration', [PageController::class, 'registration']);
 Route::get('/account', [PageController::class, 'account']);
 Route::get('/settings', [PageController::class, 'settings']);
 
+Route::get('/login-account', [PageController::class, 'login']);
+
 // Route::post('/get-session', [PageController::class, 'getSession']);
 Route::post('/saveCart', [PageController::class, 'saveCart'])->name('save.cart');
 Route::get('/getCart', [PageController::class, 'getCart'])->name('get.cart');
 
 Route::post('/add-contact', [PageController::class, 'addContact']);
+
+Route::post('/reg-account', [PageController::class, 'regAccount']);
 
 
 Route::get('/success', [App\Http\Controllers\ResponseController::class, 'success'])->name('success');

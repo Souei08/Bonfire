@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Blog;
-use App\Models\Contactus;
+use App\Models\User;
 use App\Models\Product;
+use App\Models\Contactus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class PageController extends Controller
 {
@@ -41,8 +43,10 @@ class PageController extends Controller
     }
     public function shop (Request $request)
     {
-        $items = Product::get();
-        return view('frontend.pages.shop', compact('items'));
+        $items = Product::where('category', 'HEXAGONAL BRIQUETS')->get();
+        $items2 = Product::where('category', 'SHISHA BRIQUETS')->get();
+        $items3 = Product::where('category', 'PILLOW BRIQUETS')->get();
+        return view('frontend.pages.shop', compact('items', 'items2', 'items3'));
     }
     public function contact (Request $request)
     {
@@ -112,4 +116,37 @@ class PageController extends Controller
         $cart = session('cart');
         return response()->json(['success' => true, 'cart' => $cart]);
     }
+
+    public function login (Request $request)
+    {
+        return view('frontend.pages.login');
+    }
+
+
+    public function regAccount (Request $request){
+        // return 'test';
+        $request->validate([
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'email' => 'required|email',
+            'number' => 'required',
+            'password' => 'required|min:6', // Add any other password validation rules here
+            'password_confirmation' => 'required|same:password',
+        ]);
+
+
+        User::create([
+            'firstName' => $request->firstname,
+            'lastName' => $request->lastname,
+            'email' => $request->email,
+            'number' => $request->number,
+            'password' => Hash::make($request->password),
+            'role' => 'user',
+        ]);
+
+        return redirect('login-account')->with('success','Successfully Register');
+
+    }
+
+    
 }

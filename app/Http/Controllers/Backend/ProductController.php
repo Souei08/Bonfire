@@ -48,6 +48,7 @@ class ProductController extends Controller
             'thumbnail' => 'required',
             'weight' => 'required',
             'description' => 'required',
+            'price' => 'required',
         ]);
 
         $file = $request->thumbnail;
@@ -62,6 +63,7 @@ class ProductController extends Controller
             'thumbnail' => $file_name,
             'weight' => $request->weight,
             'description' => $request->description,
+            'price' => $request->price,
             'height' => $request->height,
             'width' => $request->width,
             'length' => $request->length,
