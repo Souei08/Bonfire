@@ -81,7 +81,7 @@
                                         <h5 class="text-secondary text-center">-----------------------------------------------</h5>
                                     </div>
                                     <div class="col-md-2">
-                                        <h5 class="text-center">P680.00</h5>
+                                        <h5 class="text-center">P{{$item->price}}</h5>
                                     </div>
                                 </div>
 
@@ -101,7 +101,7 @@
                                         <h6>{{$item->weight}}</h6>
                                         <br>
                                         <h6 class="text-secondary">Size/Dimension</h6>
-                                        <h6>550 mm x 450 mm x 200 mm</h6>
+                                        <h6>{{$item->length}} mm x {{$item->width}} mm x {{$item->height}} mm</h6>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="row align-items-end justify-content-center justify-content-lg-end pt-3" style="height: 100%;">
@@ -121,111 +121,126 @@
                             </div>
                         </div>
                     @endforeach
-
-                    <!-- Product -->
-                    <div class="row my-5">
-                        <div class="col-lg-5">
-                            <div class="d-flex align-items-center justify-content-center h-100">
-                                <img src="{{ asset('images/img-product-2.jpg') }}" class="d-block align-middle img-fluid" alt="...">
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h5 class="text-center">Charcoal Briquets</h5>
-                                </div>
-                                <div class="col-md-7">
-                                    <h5 class="text-secondary text-center">-----------------------------------------------</h5>
-                                </div>
-                                <div class="col-md-2">
-                                    <h5 class="text-center">P60.00</h5>
-                                </div>
-                            </div>
-
-
-                            <div class="row px-3 px-lg-4  py-4">
-                                <div class="col-md-6">
-                                    <h6 class="text-secondary">Product Name</h6>
-                                    <h6>Charcoal Briquets</h6>
-                                    <br>
-                                    <h6 class="text-secondary">Description</h6>
-                                    <h6>Charcoal Briquets in Plastic Bag</h6>
-                                    <br>
-                                    <h6 class="text-secondary">Varation</h6>
-                                    <h6>none</h6>
-                                    <br>
-                                    <h6 class="text-secondary">Weight</h6>
-                                    <h6>1 kg</h6>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row align-items-end justify-content-center justify-content-lg-end pt-3" style="height: 100%;">
-                                        <a href="{{ url('cart') }}" class="btn btn-primary-3 fs-4 px-4 w-auto d-flex align-items-center" style="height: auto;">
-                                            <span class="span-text">+ ADD TO CART</span>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product -->
-                    <div class="row my-5">
-                        <div class="col-lg-5">
-                            <div class="d-flex align-items-center justify-content-center h-100">
-                                <img src="{{ asset('images/img-product-3.jpg') }}" class="d-block align-middle img-fluid" alt="...">
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h5 class="text-center">Charcoal Briquets</h5>
-                                </div>
-                                <div class="col-md-7">
-                                    <h5 class="text-secondary text-center">-----------------------------------------------</h5>
-                                </div>
-                                <div class="col-md-2">
-                                    <h5 class="text-center">P170.00</h5>
-                                </div>
-                            </div>
-
-
-                            <div class="row px-3 px-lg-4  py-4">
-                                <div class="col-md-6">
-                                    <h6 class="text-secondary">Product Name</h6>
-                                    <h6>Charcoal Briquets</h6>
-                                    <br>
-                                    <h6 class="text-secondary">Description</h6>
-                                    <h6>Charcoal Briquets in Paper Bag</h6>
-                                    <br>
-                                    <h6 class="text-secondary">Varation</h6>
-                                    <h6>none</h6>
-                                    <br>
-                                    <h6 class="text-secondary">Weight</h6>
-                                    <h6>2 kgs</h6>
-                                    <br>
-                                    <h6 class="text-secondary">Size/Dimension</h6>
-                                    <h6>177 mm x 127 mm x 356 mm</h6>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row align-items-end justify-content-center justify-content-lg-end pt-3" style="height: 100%;">
-                                        <a href="{{ url('cart') }}" class="btn btn-primary-3 fs-4 px-4 w-auto d-flex align-items-center" style="height: auto;">
-                                            <span class="span-text">+ ADD TO CART</span>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                 </div>
                 <div class="tab-pane fade" id="v-pills-shisha" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                    <h3>Tab 2 Content</h3>
-                    <p>This is the content for Tab 2.</p>
+                    @foreach($items2 as $item)
+                        <div class="row my-5">
+                            <div class="col-lg-5">
+                                <div class="d-flex align-items-center justify-content-center h-100">
+                                    <img src="{{ asset('images/img-product-1.jpg') }}" class="d-block align-middle img-fluid" alt="...">
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5 class="text-center">{{$item->prodName}}</h5>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h5 class="text-secondary text-center">-----------------------------------------------</h5>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h5 class="text-center">P{{$item->price}}</h5>
+                                    </div>
+                                </div>
+
+
+                                <div class="row px-3 px-lg-4  py-4">
+                                    <div class="col-md-6">
+                                        <h6 class="text-secondary">Product Name</h6>
+                                        <h6>{{$item->prodName}}</h6>
+                                        <br>
+                                        <h6 class="text-secondary">Description</h6>
+                                        <h6>{!!$item->description!!}</h6>
+                                        <br>
+                                        <h6 class="text-secondary">Varation</h6>
+                                        <h6>{{$item->varation}}</h6>
+                                        <br>
+                                        <h6 class="text-secondary">Weight</h6>
+                                        <h6>{{$item->weight}}</h6>
+                                        <br>
+                                        <h6 class="text-secondary">Size/Dimension</h6>
+                                        <h6>{{$item->length}} mm x {{$item->width}} mm x {{$item->height}} mm</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row align-items-end justify-content-center justify-content-lg-end pt-3" style="height: 100%;">
+                                            
+
+                                            <button 
+                                                data-items="{{$item}}"
+                                                class="addToCartButton btn btn-primary-3 fs-4 px-4 w-auto d-flex align-items-center" 
+                                                style="height: auto;"
+                                            >
+                                                <span class="span-text">+ ADD TO CART</span>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    
                 </div>
                 <div class="tab-pane fade" id="v-pills-pillow" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                    <h3>Tab 3 Content</h3>
-                    <p>This is the content for Tab 3.</p>
+                    @foreach($items3 as $item)
+                    <div class="row my-5">
+                        <div class="col-lg-5">
+                            <div class="d-flex align-items-center justify-content-center h-100">
+                                <img src="{{ asset('images/img-product-1.jpg') }}" class="d-block align-middle img-fluid" alt="...">
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5 class="text-center">{{$item->prodName}}</h5>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5 class="text-secondary text-center">-----------------------------------------------</h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5 class="text-center">P{{$item->price}}</h5>
+                                </div>
+                            </div>
+
+
+                            <div class="row px-3 px-lg-4  py-4">
+                                <div class="col-md-6">
+                                    <h6 class="text-secondary">Product Name</h6>
+                                    <h6>{{$item->prodName}}</h6>
+                                    <br>
+                                    <h6 class="text-secondary">Description</h6>
+                                    <h6>{!!$item->description!!}</h6>
+                                    <br>
+                                    <h6 class="text-secondary">Varation</h6>
+                                    <h6>{{$item->varation}}</h6>
+                                    <br>
+                                    <h6 class="text-secondary">Weight</h6>
+                                    <h6>{{$item->weight}}</h6>
+                                    <br>
+                                    <h6 class="text-secondary">Size/Dimension</h6>
+                                    <h6>{{$item->length}} mm x {{$item->width}} mm x {{$item->height}} mm</h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row align-items-end justify-content-center justify-content-lg-end pt-3" style="height: 100%;">
+                                        
+
+                                        <button 
+                                            data-items="{{$item}}"
+                                            class="addToCartButton btn btn-primary-3 fs-4 px-4 w-auto d-flex align-items-center" 
+                                            style="height: auto;"
+                                        >
+                                            <span class="span-text">+ ADD TO CART</span>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                
                 </div>
             </div>
         </div>
