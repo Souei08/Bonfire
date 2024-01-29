@@ -56,12 +56,12 @@
                             <span class="">Profile Settings</span>
                         </div>
                     </a>
-                    <a class="btn w-100 rounded-0 profile-button border-0 {{ request()->is('user/support') ? 'active' : '' }}" onmouseover="changeImage3('cartImage3', true)" onmouseout="changeImage3('cartImage3', false)">
+                    {{-- <a class="btn w-100 rounded-0 profile-button border-0 {{ request()->is('user/support') ? 'active' : '' }}" onmouseover="changeImage3('cartImage3', true)" onmouseout="changeImage3('cartImage3', false)">
                         <div class="d-flex justify-content-start align-items-center px-5 py-1">
                             <span class=""><img src="{{ asset('images/icon-blck-support.png') }}" class="d-block align-middle img-fluid me-2" alt="..." id="cartImage3"></span>
                             <span class="">Support</span>
                         </div>
-                    </a>
+                    </a> --}}
                     <form action="{{ url('user/logout') }}" method="POST">@csrf
                         <button class="btn w-100 rounded-0 profile-button border-0">
                             <div class="d-flex justify-content-start align-items-center px-5 py-1">
@@ -77,7 +77,7 @@
                 <div class="row py-5 px-4">
                     <div class="col-lg-4">
                         <div class="p-5 bg-white rounded">
-                            <img src="{{ asset('images/img-profile.png') }}" class="d-block align-middle img-fluid mx-auto w-100" alt="...">
+                            <img src="{{ asset('images/profile-img.png') }}" class="d-block align-middle img-fluid mx-auto w-100" alt="...">
                             <br>
                             <h4>My Profile</h4>
                             <br>
@@ -92,7 +92,10 @@
                             </div>
                             
                             <div class="row justify-content-center align-items-center pt-4">
-                                <a href="{{ url('user/account/edit') }}" class="btn btn-primary fs-4 px-5 w-auto">EDIT</a>
+                                <a href="{{ url('user/account/edit') }}" class="btn btn-primary fs-4 px-5 w-auto">EDIT Profile</a>
+                            </div>
+                            <div class="row justify-content-center align-items-center pt-4">
+                                <a href="{{ url('user/account/edit') }}" class="btn btn-primary fs-4 px-5 w-auto">Change password</a>
                             </div>
                         </div>
                     </div>

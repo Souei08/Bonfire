@@ -56,7 +56,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a href="{{ url('admin/dashboard') }}" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                        {{-- <i class="nav-icon fas fa-home"></i> --}}
                         <p>
                             Dashboard
                         </p>
@@ -65,7 +65,7 @@
 
                 <li class="nav-item">
                     <a href="{{ url('admin/banner') }}" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                        {{-- <i class="nav-icon fas fa-home"></i> --}}
                         <p>
                             Banner
                         </p>
@@ -74,7 +74,7 @@
 
                 <li class="nav-item">
                     <a href="{{ url('admin/products') }}" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                        {{-- <i class="nav-icon fas fa-home"></i> --}}
                         <p>
                             Products
                         </p>
@@ -83,7 +83,7 @@
 
                 <li class="nav-item">
                     <a href="{{ url('admin/blog') }}" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                        {{-- <i class="nav-icon fas fa-home"></i> --}}
                         <p>
                             Blog
                         </p>
@@ -92,7 +92,7 @@
 
                 <li class="nav-item">
                     <a href="{{ url('admin/promo') }}" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                        {{-- <i class="nav-icon fas fa-home"></i> --}}
                         <p>
                             Promo
                         </p>
@@ -100,8 +100,17 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ url('admin/order') }}" class="nav-link">
+                        {{-- <i class="nav-icon fas fa-home"></i> --}}
+                        <p>
+                            Orders
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ url('admin/contact-us') }}" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                        {{-- <i class="nav-icon fas fa-home"></i> --}}
                         <p>
                             Contact Us
                         </p>

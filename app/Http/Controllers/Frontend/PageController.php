@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Blog;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\Promo;
 use App\Models\Product;
+use App\Models\Profile;
 use App\Models\Contactus;
+use App\Models\Shippinginfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +35,8 @@ class PageController extends Controller
         $firstpin = Blog::where('pinned', 1)->take(1)->get();
         $latest = Blog::where('pinned', 1)->take(2)->get();
         $blog = Blog::get();
-        return view('frontend.pages.news', compact('firstpin', 'latest', 'blog'));
+        $promo = Promo::get();
+        return view('frontend.pages.news', compact('firstpin', 'latest', 'blog', 'promo'));
     }
     public function newsArticle (Request $request)
     {
@@ -62,12 +67,23 @@ class PageController extends Controller
     {
         $cart = session('cart');
         $decodedCarts = json_decode($cart);
+        // return $decodedCarts;
 
         return view('frontend.pages.cart', compact('decodedCarts'));
     }
     public function payment (Request $request)
     {
-        return view('frontend.pages.payment');
+        $cart = session('cart');
+        $decodedCarts = json_decode($cart);
+
+        $user = Auth::user();
+        if($user){
+            $profile = Profile::where('uid', $user->id)->first();
+            $info = Shippinginfo::where('uid', $user->id)->first();
+            return view('frontend.pages.payment', compact('profile', 'info', 'decodedCarts'));
+        }
+        return view('frontend.pages.payment', compact('decodedCarts'));
+        
     }
     public function registration (Request $request)
     {
@@ -76,27 +92,32 @@ class PageController extends Controller
     public function account (Request $request)
     {
         if (Auth::check()) {
-            // Get the currently authenticated user
             $user = Auth::user();
-    
-            // You can now safely access the user's information
-            // For example, $user->firstName, $user->email, etc.
-    
             return view('frontend.pages.account', ['user' => $user]);
         } else {
-            // Redirect to the login page or handle the case where the user is not authenticated
             return redirect()->route('login-account');
         }
     }
     public function accountEdit (Request $request)
     {
-
-        return view('frontend.pages.accountEdit');
+        $user = Auth::user();
+        $profile = Profile::where('uid', $user->id)->get();
+        return view('frontend.pages.accountEdit', compact('profile'));
     
     }
     public function settings (Request $request)
     {
-        return view('frontend.pages.settings');
+        $user = Auth::user();
+        $profile = Profile::where('uid', $user->id)->get();
+        if(!$profile){
+            return view('frontend.pages.settings', compact('profile') );
+        }
+        else{
+            $profile = Shippinginfo::where('uid', $user->id)->get();
+            return view('frontend.pages.settings', compact('profile') );
+        }
+        
+       
     }
     public function addContact (Request $request)
     {
@@ -135,6 +156,26 @@ class PageController extends Controller
         return response()->json(['success' => true, 'cart' => $cart]);
     }
 
+    public function removeToCart(Request $request)
+    {
+
+        $productIdToRemove = $request->cartId;
+
+        $cart = json_decode(session()->get('cart', '[]'), true);
+
+        foreach ($cart as $key => $product) {
+            if ($product['id'] == $productIdToRemove) {
+                unset($cart[$key]);
+                break; 
+            }
+        }
+        session(['cart' => json_encode($cart)]);
+
+        return redirect('cart')->with('success', "Item Removed");
+    }
+
+
+
     public function login (Request $request)
     {
         return view('frontend.pages.login');
@@ -148,12 +189,12 @@ class PageController extends Controller
             'firstname' => 'required',
             'email' => 'required|email',
             'number' => 'required',
-            'password' => 'required|min:6', // Add any other password validation rules here
+            'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
         ]);
 
 
-        User::create([
+        $user = User::create([
             'firstName' => $request->firstname,
             'lastName' => $request->lastname,
             'email' => $request->email,
@@ -161,10 +202,152 @@ class PageController extends Controller
             'password' => Hash::make($request->password),
             'role' => 'user',
         ]);
+        
+        Profile::create([
+            'uid' => $user->id,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'number' => $request->number,
+        ]);
 
         return redirect('login-account')->with('success','Successfully Register');
 
     }
+
+    public function updateAccount(Request $request)
+    {
+        $user = Auth::user();
+        $users = User::where('id' ,$user->id);
+        $profile = Profile::where('uid' ,$user->id);
+
+       
+        if ($request->hasFile('profile_picture')) {
+    
+            $file = $request->file('profile_picture');
+            $file_name = time() . 'ti' . '.' . $file->getClientOriginalExtension();
+            $destination = public_path() . '/uploads/profile_picture';
+            $file->move($destination, $file_name);
+
+            $profile->update([
+                'profile_picture' => $file_name,
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'state' => $request->state,
+                'city' => $request->city,
+                'barangay' => $request->barangay,
+                'address' => $request->address,
+                'number' => $request->number
+            ]);
+    
+        } else {
+            $profile->update([
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'state' => $request->state,
+                'city' => $request->city,
+                'barangay' => $request->barangay,
+                'address' => $request->address,
+                'number' => $request->number
+            ]);
+        
+        }
+        
+        $users->update([
+            'number' => $request->number
+        ]);
+
+        return redirect('/user/account/edit')->with('success','Successfully Updated');
+    }
+
+    public function shippingInfo(Request $request)
+    {
+        $user = Auth::user();
+        $info = Shippinginfo::where('uid', $user->id)->first();
+
+        if ($info) {
+            $info->update([
+                'uid' => $user->id,
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'state' => $request->state,
+                'city' => $request->city,
+                'barangay' => $request->barangay,
+                'address' => $request->address,
+                'email' => $request->email,
+                'number' => $request->number
+            ]);
+            
+        } else {
+            Shippinginfo::create([
+                'uid' => $user->id,
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'state' => $request->state,
+                'city' => $request->city,
+                'barangay' => $request->barangay,
+                'address' => $request->address,
+                'email' => $request->email,
+                'number' => $request->number
+            ]);
+           
+        }
+
+        return redirect('/user/settings')->with('success','Successfully Updated');
+
+    }
+
+    public function payItem(Request $request)
+    {
+        // return $request;
+        $request->validate([
+            'firstname' => 'required', 
+            'lastname' => 'required',
+            'address' => 'required',
+            'email' => 'required',
+            'number' => 'required',
+            'shippingfirstname' => 'required',
+            'shippinglastname' => 'required',
+            'shippingState' => 'required',
+            'shippingCity' => 'required',
+            'shippingBarangay' => 'required',
+            'shippingAddress' => 'required',
+            'shippingNumber' => 'required',
+            'payment_method' => 'required',
+            'item' => 'required',
+            'qty' => 'required',
+        
+        ]);
+
+       $order =  Order::create([
+            'refnumber' => rand(111111, 999999),
+            'firstname' => $request->firstname, 
+            'lastname' => $request->lastname, 
+            'address' => $request->address, 
+            'email' => $request->email, 
+            'number' => $request->number, 
+            'shippingfirstname' => $request->shippingfirstname, 
+            'shippinglastname' => $request->shippinglastname, 
+            'shippingState' => $request->shippingState, 
+            'shippingCity' => $request->shippingCity, 
+            'shippingBarangay' => $request->shippingBarangay, 
+            'shippingAddress' => $request->shippingAddress, 
+            'shippingNumber' => $request->shippingNumber, 
+            'payment_method' => $request->payment_method, 
+            'item' => json_encode($request->item), 
+            'qty' => json_encode($request->qty), 
+            'totalPrice' => $request->totalPrice,
+        ]);
+        
+
+        return 'success' . $order->refnumber;
+
+    }
+
+
+
+
+
 
     
 }

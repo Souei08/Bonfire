@@ -27,7 +27,10 @@ Route::get('/promotions-article', [PageController::class, 'promotionsArticle']);
 Route::get('/shop', [PageController::class, 'shop']);
 Route::get('/contact', [PageController::class, 'contact']);
 Route::get('/cart', [PageController::class, 'cart']);
+
 Route::get('/payment', [PageController::class, 'payment']);
+
+Route::post('/pay', [PageController::class, 'payItem']);
 Route::get('/registration', [PageController::class, 'registration']);
 
 
@@ -41,6 +44,8 @@ Route::get('/getCart', [PageController::class, 'getCart'])->name('get.cart');
 Route::post('/add-contact', [PageController::class, 'addContact']);
 
 Route::post('/reg-account', [PageController::class, 'regAccount']);
+
+Route::post('/removeCart', [PageController::class, 'removeToCart']);
 
 
 Route::get('/success', [App\Http\Controllers\ResponseController::class, 'success'])->name('success');
@@ -69,6 +74,8 @@ Route::prefix('admin')->middleware(['auth', 'user-access:cms'])->group(function 
     Route::resource('products', BackendController\ProductController::class);
     Route::resource('blog', BackendController\BlogController::class);
     Route::resource('promo', BackendController\PromoController::class);
+    Route::resource('order', BackendController\OrderController::class);
+
 
 
     Route::get('pinned/{id}', [BackendController\BlogController::class, 'pinned']);
@@ -86,4 +93,10 @@ Route::prefix('user')->middleware(['auth', 'user-access:user'])->group(function 
     Route::get('/account', [PageController::class, 'account']);
     Route::get('/settings', [PageController::class, 'settings']);
     Route::get('/account/edit', [PageController::class, 'accountEdit']);
+
+    Route::post('/account/edit', [PageController::class, 'accountEdit']);
+    Route::PUT('/updateAccount', [PageController::class, 'updateAccount']);
+    Route::PUT('/shippingInfo', [PageController::class, 'shippingInfo']);
+
+    
 });

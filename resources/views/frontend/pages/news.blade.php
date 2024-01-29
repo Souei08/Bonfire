@@ -55,30 +55,15 @@
         <div class="owl-carousel owl-theme owl-loaded owl-drag">
             <div class="owl-stage-outer">
                 <div class="owl-stage">
-                    <div class="owl-item">
-                        <a href="{{ url('promotions-article') }}" style="color: inherit">
-                            <div class="bg-dark position-relative">
-                                <img src="{{ asset('images/img-promo-1.png') }}" class="w-100" alt="" style="height: 300px;">
-
-                            </div>
-                        </a>
-                    </div>
-                    <div class="owl-item">
-                        <a href="{{ url('promotions-article') }}" style="color: inherit">
-                            <div class="bg-primary position-relative">
-                                <img src="{{ asset('images/img-promo-2.png') }}" class="w-100" alt="" style="height: 300px;">
-
-                            </div>
-                        </a>
-                    </div>
-                    <div class="owl-item">
-                        <a href="{{ url('promotions-article') }}" style="color: inherit">
-                            <div class="bg-primary position-relative">
-                                <img src="{{ asset('images/img-promo-2.png') }}" class="w-100" alt="" style="height: 300px;">
-
-                            </div>
-                        </a>
-                    </div>
+                    @foreach($promo as $promos)
+                        <div class="owl-item">
+                            <a href="{{ url('promotions-article') }}" style="color: inherit">
+                                <div class="bg-dark position-relative">
+                                    <img src="{{ asset('uploads/promo/' .$promos->thumbnail) }}" class="w-100" alt="" style="height: 300px;">
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -101,11 +86,11 @@
         <div class="col-lg-8 p-2">
             <a href="{{ url('news-article') }}" style="color: inherit">
                 <div class="position-relative">
-                    <img src="{{ asset('images/img-news-ng-1.png') }}" class="d-block align-middle img-fluid w-100 rounded-3 shadow" alt="...">
+                    <img src="{{ asset('uploads/blog/' .$pinned->thumbnail) }}" class="d-block align-middle img-fluid w-100 rounded-3 shadow" alt="...">
                     <div class="d-flex flex-column justify-content-end position-absolute top-0 w-100 h-100 p-3 p-md-5 p-lg-3 p-xl-5" style="background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgba(255,255,255,0.2), rgba(255,255,255,1));">
                         <h4 class="fw-bold">{{$pinned->title}}</h4>
                         <p>{!!$pinned->description!!}</p>
-                        <h6><b>Jan Cruz |</b> Oct 17, 2023</h6>
+                        <h6><b>{{$pinned->author}} |</b>{{ $pinned->created_at->format('M d, Y') }}</h6>
                     </div>
                 </div>
             </a>
@@ -116,10 +101,10 @@
             @foreach($latest as $latests)
             <div class="position-relative w-100">
                 <a href="{{ url('news-article') }}" style="color: inherit">
-                    <img src="{{ asset('images/img-news-ng-2.png') }}" class="d-block align-middle img-fluid w-100 rounded-3 shadow h-100" alt="...">
+                    <img src="{{ asset('uploads/blog/' .$latests->thumbnail) }}" class="d-block align-middle img-fluid w-100 rounded-3 shadow h-100" alt="...">
                     <div class="d-flex flex-column justify-content-end position-absolute top-0 w-100 h-100 p-3 p-md-5 p-lg-3 p-xl-3" style="background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgba(255,255,255,0.2), rgba(255,255,255,1));">
                         <h5 class="fw-bold" id="title">{{$latests->title}}</h5>
-                        <h6><b>Jan Cruz |</b> Oct 17, 2023</h6>
+                        <h6><b>{{$latests->author}} |</b> {{ $latests->created_at->format('M d, Y') }}</h6>
                     </div>
                 </a>
             </div>
@@ -143,67 +128,21 @@
 <br>
 <div class="container">
     <div class="row justify-content-center gy-4">
+        @foreach($blog as $blogs)
         <div class="col-lg-4">
             <a href="{{ url('news-article') }}" style="color: inherit">
-                <div class="position-relative w-100">
-                    <img src="{{ asset('images/img-news-ng-2.png') }}" class="d-block align-middle img-fluid w-100 rounded-3 shadow h-100" alt="...">
+                <div class="position-relative" style="width: 40vh">
+                    <img src="{{ asset('uploads/blog/' .$blogs->thumbnail) }}" class="d-block align-middle img-fluid w-100 rounded-3 shadow h-100" alt="...">
                     <div class="d-flex flex-column justify-content-end position-absolute top-0 w-100 h-100 p-3 p-md-5 p-lg-3 p-xl-3" style="background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgba(255,255,255,0.2), rgba(255,255,255,1));">
-                        <h5 class="fw-bold" id="title">Set blandit libero volutpat sed cras ornare arcu sit amet luctus</h5>
-                        <h6><b>Jan Cruz |</b> Oct 17, 2023</h6>
+                        <h5 class="fw-bold" id="title">{{$blogs->title}}</h5>
+                        <h6><b>{{$blogs->author}} |</b> {{ $blogs->created_at->format('M d, Y') }}</h6>
                     </div>
                 </div>
             </a>
         </div>
+        @endforeach
 
-        <div class="col-lg-4">
-            <div class="position-relative w-100">
-                <img src="{{ asset('images/img-news-ng-4.png') }}" class="d-block align-middle img-fluid w-100 rounded-3 shadow h-100" alt="...">
-                <div class="d-flex flex-column justify-content-end position-absolute top-0 w-100 h-100 p-3 p-md-5 p-lg-3 p-xl-3" style="background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgba(255,255,255,0.2), rgba(255,255,255,1));">
-                    <h5 class="fw-bold" id="title">Set blandit libero volutpat sed cras ornare arcu sit amet luctus</h5>
-                    <h6><b>Jan Cruz |</b> Oct 17, 2023</h6>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div class="position-relative w-100">
-                <img src="{{ asset('images/img-news-ng-5.png') }}" class="d-block align-middle img-fluid w-100 rounded-3 shadow h-100" alt="...">
-                <div class="d-flex flex-column justify-content-end position-absolute top-0 w-100 h-100 p-3 p-md-5 p-lg-3 p-xl-3" style="background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgba(255,255,255,0.2), rgba(255,255,255,1));">
-                    <h5 class="fw-bold" id="title">Set blandit libero volutpat sed cras ornare arcu sit amet luctus</h5>
-                    <h6><b>Jan Cruz |</b> Oct 17, 2023</h6>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div class="position-relative w-100">
-                <img src="{{ asset('images/img-news-ng-2.png') }}" class="d-block align-middle img-fluid w-100 rounded-3 shadow h-100" alt="...">
-                <div class="d-flex flex-column justify-content-end position-absolute top-0 w-100 h-100 p-3 p-md-5 p-lg-3 p-xl-3" style="background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgba(255,255,255,0.2), rgba(255,255,255,1));">
-                    <h5 class="fw-bold" id="title">Set blandit libero volutpat sed cras ornare arcu sit amet luctus</h5>
-                    <h6><b>Jan Cruz |</b> Oct 17, 2023</h6>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div class="position-relative w-100">
-                <img src="{{ asset('images/img-news-ng-4.png') }}" class="d-block align-middle img-fluid w-100 rounded-3 shadow h-100" alt="...">
-                <div class="d-flex flex-column justify-content-end position-absolute top-0 w-100 h-100 p-3 p-md-5 p-lg-3 p-xl-3" style="background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgba(255,255,255,0.2), rgba(255,255,255,1));">
-                    <h5 class="fw-bold" id="title">Set blandit libero volutpat sed cras ornare arcu sit amet luctus</h5>
-                    <h6><b>Jan Cruz |</b> Oct 17, 2023</h6>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div class="position-relative w-100">
-                <img src="{{ asset('images/img-news-ng-5.png') }}" class="d-block align-middle img-fluid w-100 rounded-3 shadow h-100" alt="...">
-                <div class="d-flex flex-column justify-content-end position-absolute top-0 w-100 h-100 p-3 p-md-5 p-lg-3 p-xl-3" style="background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgba(255,255,255,0.2), rgba(255,255,255,1));">
-                    <h5 class="fw-bold" id="title">Set blandit libero volutpat sed cras ornare arcu sit amet luctus</h5>
-                    <h6><b>Jan Cruz |</b> Oct 17, 2023</h6>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>
 <br>

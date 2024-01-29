@@ -39,7 +39,6 @@
         height: 60vh;
         background-position: center;
         background-size: cover;
-
         display: flex;
         justify-content: center;
         align-items: center;
@@ -50,6 +49,11 @@
     <div class="row">
         <h4 class="fw-bold py-2">MY CART</h4>
     </div>
+    @if (Session::has('success'))
+        <div class="alert alert-success alert-dismissible">
+         {{ Session::get('success') }}
+        </div>
+    @endif
 
     <div class="row py-2" style="border-bottom: 2px solid #f6b024;">
         <div class="col-lg-3">
@@ -68,7 +72,6 @@
 
     @if(is_array($decodedCarts) && count($decodedCarts) > 0)
     @foreach($decodedCarts as $cart)
-
     <div class="row py-2" style="border-bottom: 2px solid #f6b024;">
         <div class="col-lg-3">
             <div class="d-flex align-items-center h-100">
@@ -88,20 +91,26 @@
                     <input type="text" class="form-control text-center border-0 fw-bold" value="{{empty($cart->qty) ? 1 : $cart->qty }}" id="quantityProduct" readonly>
                     <button class="btn rounded fw-bold shadow" type="button" id="incrementQuantity" style="color: #065fad;">+</button>
                 </div>
-                <a href="" class="mx-2" style="color: #054780;">Remove</a>
+                <form action="{{url('removeCart')}}" method="POST">@csrf
+                <button type="submit" value="{{$cart->id}}" name="cartId" class="mx-2" style="color: #054780; border:none; background:none; text-decoration: underline;">Remove</button>
+                </form>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="d-flex align-items-center h-100 justify-content-lg-start justify-content-center">
-                <h5 class="fw-bold price">P{{$cart->price}}</h5>
+                @php
+                    $totalPrice = isset($cart->qty) && $cart->qty > 1 ? $cart->price * $cart->qty : $cart->price;
+                @endphp
+            
+            <h5 class="fw-bold price">P{{ $totalPrice }}</h5>
             </div>
         </div>
     </div>
     @endforeach
     @else
-    <div class="mt-3">
-        <h2>No items in the cart.</h2>
-    </div>
+        <div class="mt-3">
+            <h2>No items in the cart.</h2>
+        </div>
     @endif
 
     <style>
@@ -155,14 +164,33 @@
 
     <div class="row justify-content-end">
         <div class="col-lg-4">
-            <h4>Total Summary</h4>
+            @php
+                $totalPrice = 0;
+            @endphp
+            @if(is_array($decodedCarts) && count($decodedCarts) > 0)
+            @foreach($decodedCarts as $cart)
+            @php
 
+                    $qty = 0;
+                    if(!isset($cart->qty)){
+                        $qty = 1;
+                    }
+                    else{
+                        $qty = $cart->qty;
+                    }
+                    $totalPrice += $cart->price * $qty;
+                // $totalPrice += $cart->price;
+            @endphp
+            @endforeach
+            @endif
+            <h4>Total Summary</h4>
+            
             <div class="row justify-content-between">
                 <div class="col-md-6">
                     <h5 class="text-secondary">Subtotal:</h5>
                 </div>
                 <div class="col-md-6 text-end">
-                    <h5>P740</h5>
+                    <h5>P{{ $totalPrice }}</h5>
                 </div>
             </div>
 
@@ -171,7 +199,7 @@
                     <h5 class="text-secondary">Total:</h5>
                 </div>
                 <div class="col-md-6 text-end">
-                    <h4>P740</h5>
+                    <h4>P{{ $totalPrice }}</h5>
                     </h4>
                 </div>
             </div>
@@ -194,7 +222,7 @@
 @endsection
 
 @section('js')
-<!-- <script>
+ {{-- <script>
     $(document).ready(function() {
         var quantityInput2 = $('#quantityProduct');
 
@@ -210,7 +238,7 @@
             }
         });
     });
-    </script> -->
+    </script>  --}}
 
 <script>
     $(document).ready(function() {
@@ -246,6 +274,8 @@
             priceElement.text('P' + totalPrice.toFixed(2));
         }
     });
+
+    
 </script>
 
 @endsection

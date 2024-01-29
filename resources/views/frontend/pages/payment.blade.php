@@ -57,35 +57,61 @@
                 <h5>Personal Details</h5>
                 <div style="border:1px solid #f6b024;"></div>
                 <br>
+                <form action="{{url('/pay')}}" method="POST">@csrf
 
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="fname" class="form-control rounded-0 pt-3" id="fname" style="border-width: 2px; height: 55px;">
+                            <input type="text" name="firstname" class="form-control rounded-0 pt-3" id="fname" style="border-width: 2px; height: 55px;" value="{{ isset($profile->firstname) ? $profile->firstname : '' }}">
+                            @error('firstname')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                             <label for="fname" class="text-black placeholder-label">First Name*</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="lname" class="form-control rounded-0 pt-3" id="lname" style="border-width: 2px; height: 55px;">
+                            <input type="text" name="lastname" class="form-control rounded-0 pt-3" id="lname" style="border-width: 2px; height: 55px;" value="{{ isset($profile->lastname) ? $profile->lastname : '' }}">
+                            @error('lastname')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                             <label for="lname" class="text-black placeholder-label">Last Name*</label>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="company" class="form-control rounded-0 pt-3" id="company" style="border-width: 2px; height: 55px;">
-                            <label for="company" class="text-black placeholder-label">Company Name</label>
+                            <input type="text" name="address" class="form-control rounded-0 pt-3" id="address" style="border-width: 2px; height: 55px;"  value="{{ isset($profile->address) ? $profile->address : '' }}">
+                            @error('address')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
+                            <label for="address" class="text-black placeholder-label">Address</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
-                            <input type="email" name="email" class="form-control rounded-0 pt-3" id="email" style="border-width: 2px; height: 55px;">
+                            <input type="email" name="email" class="form-control rounded-0 pt-3" id="email" style="border-width: 2px; height: 55px;"  value="{{ isset($profile->email) ? $profile->email : '' }}">
+                            @error('email')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                             <label for="email" class="text-black placeholder-label">Email Address*</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
-                            <input type="number" name="number" class="form-control rounded-0 pt-3" id="number" style="border-width: 2px; height: 55px;">
+                            <input type="number" name="number" class="form-control rounded-0 pt-3" id="number" style="border-width: 2px; height: 55px;"  value="{{ isset($profile->number) ? $profile->number : '' }}">
+                            @error('number')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                             <label for="number" class="text-black placeholder-label">Phone Number*</label>
                         </div>
                     </div>
@@ -108,44 +134,79 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="shippingFname" class="form-control rounded-0 pt-3" id="shippingFname" style="border-width: 2px; height: 55px;">
+                            <input type="text" name="shippingfirstname" class="form-control rounded-0 pt-3" id="shippingFname" style="border-width: 2px; height: 55px;" value="{{ isset($info->firstname) ? $info->firstname : '' }}">
+                            @error('shippingfirstname')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                             <label for="shippingFname" class="text-black placeholder-label">First Name*</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="shippingLname" class="form-control rounded-0 pt-3" id="shippingLname" style="border-width: 2px; height: 55px;">
+                            <input type="text" name="shippinglastname" class="form-control rounded-0 pt-3" id="shippingLname" style="border-width: 2px; height: 55px;" value="{{ isset($info->lastname) ? $info->lastname : '' }}">
+                            @error('shippinglastname')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                             <label for="shippingLname" class="text-black placeholder-label">Last Name*</label>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="province" class="form-control rounded-0 pt-3" id="province" style="border-width: 2px; height: 55px;">
+                            <input type="text" name="shippingState" class="form-control rounded-0 pt-3" id="province" style="border-width: 2px; height: 55px;" value="{{ isset($info->state) ? $info->state : '' }}">
+                            @error('shippingState')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                             <label for="province" class="text-black placeholder-label ps-1">State/Province*</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="city" class="form-control rounded-0 pt-3" id="city" style="border-width: 2px; height: 55px;">
+                            <input type="text" name="shippingCity" class="form-control rounded-0 pt-3" id="city" style="border-width: 2px; height: 55px;" value="{{ isset($info->city) ? $info->city : '' }}">
+                            @error('shippingCity')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                             <label for="city" class="text-black placeholder-label ms-1">City*</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="barangay" class="form-control rounded-0 pt-3" id="barangay" style="border-width: 2px; height: 55px;">
+                            <input type="text" name="shippingBarangay" class="form-control rounded-0 pt-3" id="barangay" style="border-width: 2px; height: 55px;" value="{{ isset($info->barangay) ? $info->barangay : '' }}">
+                            @error('shippingBarangay')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                             <label for="barangay" class="text-black placeholder-label">Barangay*</label>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group position-relative mb-2">
-                            <input type="text" name="address" class="form-control rounded-0 pt-3" id="address" style="border-width: 2px; height: 55px;">
+                            <input type="text" name="shippingAddress" class="form-control rounded-0 pt-3" id="address" style="border-width: 2px; height: 55px;" value="{{ isset($info->address) ? $info->address : '' }}">
+                            @error('shippingAddress')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                             <label for="address" class="text-black placeholder-label ms-0 ps-0">Complete Address*</label>
                             <span class="text-secondary ps-lg-3" style="font-family: 'Roboto', sans-serif; font-size: 12px;">Ex: Block No./Unit No., Street, Residence, Barangay, City/Town, Province</span>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group position-relative mb-2">
-                            <input type="number" name="shippingNumber" class="form-control rounded-0 pt-3" id="shippingNumber" style="border-width: 2px; height: 55px;">
+                            <input type="number" name="shippingNumber" class="form-control rounded-0 pt-3" id="shippingNumber" style="border-width: 2px; height: 55px;" value="{{ isset($info->number) ? $info->number : '' }}">
+                            @error('shippingNumber')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
                             <label for="shippingNumber" class="text-black placeholder-label ms-0 ps-0">Phone Number*</label>
                         </div>
                     </div>
@@ -158,52 +219,67 @@
                 <h4>Order Summary</h4>
                 <div style="border:1px solid #f6b024;"></div>
                 <br>
-
+                @foreach($decodedCarts as $cart)
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-sm-4">
-                                <span class="span">Charcoal Briquets</span>
+                                <span class="span">{{$cart->prodName}}</span>
                             </div>
+                            @php
+                            $totalPrice = 0;
+                            @endphp
+                            @php
+                                $qty = 0;
+                                if(!isset($cart->qty)){
+                                    $qty = 1;
+                                }
+                                else{
+                                   $qty = $cart->qty;
+                                }
+                                $totalPrice += $cart->price * $qty;
+                            @endphp
                             <div class="col-sm-4">
-                                <span class="span">1X</span>
+                                <span class="span">{{$qty}}X</span>
                             </div>
                             <div class="col-sm-4 text-end">
-                                <span class="span">P680</span>
+                                <span class="span">P{{$totalPrice}}</span>
+
                             </div>
                         </div>
 
-                        <span class="span text-secondary">Charcoal Briquets in PP Sacks</span>
+                        <span class="span text-secondary">{!!$cart->description!!}</span>
                     </div>
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <span class="span">Charcoal Briquets</span>
-                            </div>
-                            <div class="col-sm-4">
-                                <span class="span">1X</span>
-                            </div>
-                            <div class="col-sm-4 text-end">
-                                <span class="span">P60</span>
-                            </div>
-                        </div>
-
-                        <span class="span text-secondary">Charcoal Briquets in Plastic Bag</span>
-                    </div>
-                </div>
+                @endforeach
                 <br>
                 <div style="border:1px solid #f6b024;"></div>
                 <br>
-
+                @php
+                $totalPrice = 0;
+                @endphp
+                @if(is_array($decodedCarts) && count($decodedCarts) > 0)
+                @foreach($decodedCarts as $cart)
+                @php
+                        
+                        $qty = 0;
+                        if(!isset($cart->qty)){
+                            $qty = 1;
+                        }
+                        else{
+                            $qty = $cart->qty;
+                        }
+                        $totalPrice += $cart->price * $qty;
+                    // $totalPrice += $cart->price;
+                @endphp
+                @endforeach
+                @endif
                 <div class="row">
                     <div class="col-sm-6">
                         <span class="span fw-bold">Subtotal</span>
                     </div>
                     <div class="col-sm-6 text-end">
-                        <span class="span">P740</span>
+                        <span class="span">P{{$totalPrice}}</span>
                     </div>
                 </div>
 
@@ -212,7 +288,8 @@
                         <span class="span fw-bold">Total</span>
                     </div>
                     <div class="col-sm-6 text-end">
-                        <span class="span fw-bold fs-5">P740</span>
+                        <span class="span fw-bold fs-5">P{{$totalPrice}}</span>
+                        <input type="hidden" value="{{$totalPrice}}" name="totalPrice">
                     </div>
                 </div>
 
@@ -233,36 +310,52 @@
                     </div> -->
 
                     <div class="form-check">
-                        <input class="form-check-input rounded-0 single-checkbox" type="checkbox" value="Card" name="CardChecked" id="CardChecked">
+                        <input class="form-check-input rounded-0 single-checkbox" type="checkbox" value="Card" name="payment_method" id="CardChecked">
+                       
                         <label class="form-check-label fw-bold" for="CardChecked">
                             Credit Card / Debit Card
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input rounded-0 single-checkbox" type="checkbox" value="GCash" name="GCashChecked" id="GCashChecked">
+                        <input class="form-check-input rounded-0 single-checkbox" type="checkbox" value="GCash" name="payment_method" id="GCashChecked">
                         <label class="form-check-label fw-bold" for="GCashChecked">
                             GCash
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input rounded-0 single-checkbox" type="checkbox" value="Paymaya" name="PaymayaChecked" id="PaymayaChecked">
+                        <input class="form-check-input rounded-0 single-checkbox" type="checkbox" value="Paymaya" name="payment_method" id="PaymayaChecked">
                         <label class="form-check-label fw-bold" for="PaymayaChecked">
                             Paymaya
                         </label>
                     </div>
-
+                    @error('payment_method')
+                    <span class="text-danger">
+                        {{ $message }}
+                    </span>
+                    @enderror
+                    
+                    @foreach ($decodedCarts as $cart)
+                       <input type="hidden" value="{{$cart->prodName}}" name="item[]">
+                       
+                       @if(isset($cart->qty))
+                       <input type="hidden" value="{{$cart->qty}}" name="qty[]">
+                       @else
+                       <input type="hidden" value="1" name="qty[]">
+                       @endif
+                    @endforeach
+                  
                     <div class="form-check my-5">
                         <input class="form-check-input rounded-0" type="checkbox" value="" name="terms" id="terms">
                         <label class="form-check-label text-secondary" for="terms">I have read and agree to the <a href="{{ asset('pdf/privacy_policy.pdf') }}" target="_blank">Privacy Policy</a></label>
                     </div>
 
                     <div class="row justify-content-center">
-                        <a href="{{ url('payment') }}" class="btn btn-primary-3 fs-4 px-5 w-auto d-flex align-items-center">
+                        <button type="submit"  class="btn btn-primary-3 fs-4 px-5 w-auto d-flex align-items-center">
                             <span class="span-text">CHECKOUT</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
-
+            </form>
             </div>
         </div>
     </div>

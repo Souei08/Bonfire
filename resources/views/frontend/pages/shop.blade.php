@@ -324,7 +324,7 @@
             callback(error, null);
         }
     });
-}
+}   
 
     $('.addToCartButton').click(function() {
         let newItem = $(this).data('items');

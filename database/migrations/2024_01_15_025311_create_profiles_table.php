@@ -15,6 +15,16 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('uid');
+            $table->longText('profile_picture');
+            $table->longText('lastname');
+            $table->longText('firstname');
+            $table->longText('state')->nullable();
+            $table->longText('city')->nullable();
+            $table->longText('barangay')->nullable();
+            $table->longText('address')->nullable();
+            $table->longText('email')->nullable();
+            $table->longText('number')->nullable();
             $table->timestamps();
         });
     }
